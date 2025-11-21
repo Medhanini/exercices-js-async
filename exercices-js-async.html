@@ -819,7 +819,11 @@ function rafraichirMaintenant() {
                 };
                 
                 // TODO: Votre code ici
-                
+                if(id <= 0){
+                    callback(new Error("ID invalide"));
+                }else{
+                    callback(null, utilisateur);
+                }
             }, 1000);
         }
 
