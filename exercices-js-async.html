@@ -939,7 +939,19 @@ function rafraichirMaintenant() {
         // EXERCICE 4.1
         function recupererUtilisateurAvecFetch(userId) {
             // TODO: Votre code ici
-            
+            URL= `https://jsonplaceholder.typicode.com/users/${userId}`
+            return fetch(URL).then(response => {
+                if(!response.ok){
+                    console.log("error : "+ response.status)
+                }
+                return response.json();
+            })
+            .then(data => {
+                return data
+            })
+            .catch(error =>{
+                console.error("Une erreur est survenue :", error);
+            })
         }
 
         function exercice4_1() {
