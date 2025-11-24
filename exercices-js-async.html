@@ -858,7 +858,19 @@ function rafraichirMaintenant() {
             console.log("Envoi de la requête pour l'utilisateur " + userId);
             
             // TODO: Votre code ici
-            
+            const url = `https://jsonplaceholder.typicode.com/users/${userId}`
+            xhr.open('GET', url, true)
+            xhr.onreadystatechange = function() {
+                console.log(xhr.readyState)
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    
+                    var jsonResponse = JSON.parse(xhr.responseText);
+                    callback(jsonResponse);
+                }else{
+                    console.error('Request failed. Status:');
+                }
+             }
+             xhr.send();
         }
 
         function exercice2_1() {
