@@ -917,7 +917,17 @@ function rafraichirMaintenant() {
             console.log("Début de la récupération des données...");
             
             // TODO: Votre code ici
-            
+            let user = {}
+            recupererUtilisateur(1, function(utilisateur) {
+                console.log("utilisateur:", utilisateur);
+                recupererPosts(utilisateur.id, function(post) {
+                console.log("utilisateur:", post);
+                recupererCommentaires(post.id, function(commentaires) {
+                console.log("commentaires:", commentaires);
+                
+            });
+            });
+            });
         }
 
         function exercice3_1() {
