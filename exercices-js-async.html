@@ -1008,6 +1008,18 @@ function rafraichirMaintenant() {
             console.log("Début avec les Promesses...");
             
             // TODO: Votre code ici
+            recupererUtilisateurPromise(1)
+            .then(utilisateur => {
+                console.log(utilisateur)
+                recupererPostsPromise(utilisateur.id)
+                .then(Posts=>{
+                    console.log(Posts)
+                    recupererCommentairesPromise(Posts.id)
+                    .then(Commentaires=>{
+                        console.log(Commentaires)
+                    })
+                })
+            })
             
         }
 
