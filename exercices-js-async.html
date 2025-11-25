@@ -1119,7 +1119,20 @@ function rafraichirMaintenant() {
             
             try {
                 // TODO: Votre code ici
-                
+                const [utilisateur, projet, taches] = await Promise.all([
+                    obtenirDonnees('utilisateur', 1),
+                    obtenirDonnees('projet', 1),
+                    obtenirDonnees('taches', 1)
+                ]);
+                console.log("Tableau de bord");
+                console.log(`Utilisateur : ${utilisateur.nom} ${utilisateur.prenom} ${utilisateur.role}`)
+                console.log(` Projet : ${projet.nom}`);
+                console.log(`   Statut : ${projet.status}`);
+                console.log(`   Progression : ${projet.progression}%`);
+                console.log(" Tâches :");
+                taches.forEach(t => {
+                    console.log(` - ${t.titre} : ${t.fait ? "Terminée" : "Pas encore"}`);
+                });
             } catch (erreur) {
                 console.error("Erreur lors du chargement:", erreur.message);
             }
