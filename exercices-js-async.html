@@ -1048,7 +1048,30 @@ function rafraichirMaintenant() {
 
         function demonstrationPromiseAll() {
             // TODO: Votre code ici
-            
+            console.log("Version séquentielle :");
+            console.time("Durée séquentielle");
+            recupererProfil(1).then(p1 =>{
+                console.log("Profil 1 :", p1);
+                return recupererProfil(2);
+            }).then(p2 =>{
+                console.log("Profil 2 :", p2);
+                return recupererProfil(2);
+            })
+            .then(p3 =>{
+                console.log("Profil 3 :", p3);
+                console.timeEnd("Durée séquentielle");
+                console.log("\nVersion parallèle :");
+                console.time("Durée parallèle");
+
+                return Promise.all([
+                    recupererProfil(1),
+                    recupererProfil(2),
+                    recupererProfil(3)
+                ]);
+            }).then(resultats => {
+            console.log("Profils récupérés en parallèle :", resultats);
+            console.timeEnd("Durée parallèle");
+        });
         }
 
         function exercice6_1() {
