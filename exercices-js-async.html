@@ -1148,10 +1148,21 @@ function rafraichirMaintenant() {
         async function fetchAvecGestionErreur(url) {
             try {
                 // TODO: Votre code ici
-                
+                const response = await fetch(url);
+                if(!response.ok){
+                    throw new Error(`Erreur HTTP ${response.status}`);
+                }
+                try {
+                    const data = await response.json();
+                    return data;
+                } catch (jsonError) {
+                    throw new Error(`JSON invalide : ${jsonError.message}`);
+                }
             } catch (erreur) {
                 // TODO: Gérer les différents types d'erreurs
-                
+                if (erreur instanceof TypeError) {
+                    throw new Error(`Erreur : ${erreur.message}`);
+                }
                 throw erreur;
             }
         }
