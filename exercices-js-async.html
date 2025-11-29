@@ -1194,7 +1194,7 @@ function rafraichirMaintenant() {
         // EXERCICE 9.1 - Dashboard
         let intervalId = null;
         let isRunning = false;
-
+        
         async function obtenirStatistiques() {
             const delai = Math.random() * 1000 + 200;
             const debut = Date.now();
@@ -1216,20 +1216,46 @@ function rafraichirMaintenant() {
 
         async function mettreAJourDashboard() {
             try {
+                const elementActiveUsers = document.querySelector('#activeUsers')
+                const elementTodayMessages = document.querySelector('#todayMessages')
+                const elementApiTime = document.querySelector('#apiTime')
                 // TODO: Votre code ici
+                const response = await obtenirStatistiques();
+                elementActiveUsers.innerText = response.messagesAujourdhui;
+                elementTodayMessages.innerText = response.tempsReponse;
+                elementApiTime.innerText = response.utilisateursActifs;
                 
             } catch (erreur) {
                 // TODO: Gérer l'erreur
+                console.log(erreur)
             }
         }
 
         function demarrerDashboard() {
             // TODO: Votre code ici
+            if(!isRunning){
+            isRunning = true
+             mettreAJourDashboard()
+            intervalId = setInterval(mettreAJourDashboard, 3000);
+            setTimeout(() => {
+            clearInterval(intervalId);
+            arreterDashboard()
+            }, 100000);
+        }
             
         }
 
         function arreterDashboard() {
             // TODO: Votre code ici
+            isRunning = false
+            clearInterval(intervalId);
+            const elementActiveUsers = document.querySelector('#activeUsers')
+            const elementTodayMessages = document.querySelector('#todayMessages')
+            const elementApiTime = document.querySelector('#apiTime')
+            // TODO: Votre code ici
+            elementActiveUsers.innerText = "--";
+            elementTodayMessages.innerText = "--";
+            elementApiTime.innerText = "--";
             
         }
 
